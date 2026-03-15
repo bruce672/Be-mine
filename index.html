@@ -1,882 +1,1370 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noindex, nofollow">
-<title>Will You Be Mine, Shorna?</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>UI Style Showcase — All Styles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Press+Start+2P&family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Syne:wght@700;800&family=IBM+Plex+Mono:wght@400;600&family=Abril+Fatface&family=DM+Sans:wght@300;400;500&family=Unbounded:wght@700;900&display=swap" rel="stylesheet"/>
 <style>
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --rose: #e8436b;
-    --blush: #f7b8c4;
-    --cream: #fdf6f0;
-    --deep: #1a0a10;
-    --gold: #c9973a;
-    --petal: #fce4ec;
+    --gap: 3px;
   }
-
-  html { scroll-behavior: smooth; }
 
   body {
-    background: var(--deep);
-    font-family: 'Cormorant Garamond', serif;
-    overflow-x: hidden;
-    cursor: none;
+    background: #080808;
+    font-family: 'DM Sans', sans-serif;
+    color: #fff;
   }
 
-  /* Custom cursor */
-  .cursor {
-    width: 12px; height: 12px;
-    background: var(--rose);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: transform 0.1s ease, width 0.2s, height 0.2s, background 0.2s;
-    mix-blend-mode: difference;
+  /* ── HEADER ── */
+  header {
+    text-align: center;
+    padding: 60px 20px 40px;
+    background: #080808;
   }
-  .cursor-ring {
-    width: 36px; height: 36px;
-    border: 1.5px solid var(--blush);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9998;
-    transform: translate(-50%, -50%);
-    transition: left 0.12s ease, top 0.12s ease;
-    opacity: 0.6;
+  header h1 {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(28px, 5vw, 56px);
+    font-weight: 900;
+    letter-spacing: -2px;
+    background: linear-gradient(135deg, #fff 30%, #666);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
-
-  /* Floating petals */
-  .petal {
-    position: fixed;
-    font-size: 1.2rem;
-    pointer-events: none;
-    z-index: 0;
-    animation: floatPetal linear infinite;
-    opacity: 0;
-  }
-  @keyframes floatPetal {
-    0%   { transform: translateY(-60px) rotate(0deg); opacity: 0; }
-    10%  { opacity: 0.7; }
-    90%  { opacity: 0.5; }
-    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+  header p {
+    color: #555;
+    font-size: 14px;
+    margin-top: 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 1px;
   }
 
-  /* ======= INTRO SCREEN ======= */
-  #intro {
-    position: fixed; inset: 0;
-    background: var(--deep);
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    z-index: 100;
-    transition: opacity 1.2s ease, transform 1.2s ease;
+  /* ── NAV PILLS ── */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background: rgba(8,8,8,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #1a1a1a;
+    padding: 12px 20px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
   }
-  #intro.hide { opacity: 0; transform: scale(1.08); pointer-events: none; }
+  .nav a {
+    text-decoration: none;
+    padding: 5px 14px;
+    border-radius: 100px;
+    border: 1px solid #2a2a2a;
+    color: #666;
+    font-size: 11px;
+    font-family: 'IBM Plex Mono', monospace;
+    transition: all 0.2s;
+  }
+  .nav a:hover { background: #fff; color: #000; border-color: #fff; }
 
-  .intro-ring {
-    width: 180px; height: 180px;
-    border-radius: 50%;
-    border: 1px solid rgba(232,67,107,0.3);
-    display: flex; align-items: center; justify-content: center;
-    animation: pulse-ring 2.5s ease-in-out infinite;
-    position: relative;
-  }
-  .intro-ring::before {
-    content: '';
-    position: absolute; inset: -16px;
-    border-radius: 50%;
-    border: 1px solid rgba(232,67,107,0.15);
-    animation: pulse-ring 2.5s ease-in-out infinite 0.4s;
-  }
-  .intro-ring::after {
-    content: '';
-    position: absolute; inset: -32px;
-    border-radius: 50%;
-    border: 1px solid rgba(232,67,107,0.08);
-    animation: pulse-ring 2.5s ease-in-out infinite 0.8s;
-  }
-  @keyframes pulse-ring {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50%       { transform: scale(1.06); opacity: 0.5; }
-  }
-
-  .heart-center {
-    font-size: 4rem;
-    animation: heartbeat 1.4s ease-in-out infinite;
-    filter: drop-shadow(0 0 20px rgba(232,67,107,0.8));
-  }
-  @keyframes heartbeat {
-    0%, 100% { transform: scale(1); }
-    14%      { transform: scale(1.2); }
-    28%      { transform: scale(1); }
-    42%      { transform: scale(1.15); }
-    56%      { transform: scale(1); }
-  }
-
-  .intro-tagline {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    color: rgba(247,184,196,0.6);
-    font-size: 0.9rem;
-    letter-spacing: 0.35em;
+  /* ── SECTION LABEL ── */
+  .section-label {
+    padding: 60px 40px 20px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: #333;
+    letter-spacing: 3px;
     text-transform: uppercase;
-    margin-top: 2rem;
-    animation: fadeSlide 2s ease both 0.5s;
   }
-  .intro-name {
-    font-family: 'Dancing Script', cursive;
-    color: var(--blush);
-    font-size: 3.5rem;
-    margin-top: 0.4rem;
-    animation: fadeSlide 2s ease both 0.9s;
-    text-shadow: 0 0 40px rgba(232,67,107,0.5);
-  }
-  @keyframes fadeSlide {
-    from { opacity: 0; transform: translateY(18px); }
-    to   { opacity: 1; transform: translateY(0); }
+  .section-label span { color: #555; }
+
+  /* ── GRID ── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: var(--gap);
+    padding: 0 var(--gap) var(--gap);
   }
 
-  .open-btn {
-    margin-top: 3rem;
-    padding: 0.9rem 2.8rem;
-    background: transparent;
-    border: 1px solid var(--rose);
-    color: var(--blush);
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    cursor: none;
+  /* ══════════════════════════════════════════
+     1. GLASSMORPHISM
+  ══════════════════════════════════════════ */
+  .glass-wrap {
+    background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+    padding: 40px;
+    min-height: 280px;
     position: relative;
     overflow: hidden;
-    transition: color 0.3s, box-shadow 0.3s;
-    animation: fadeSlide 2s ease both 1.4s;
   }
-  .open-btn::before {
+  .glass-wrap::after {
     content: '';
+    position: absolute;
+    width: 200px; height: 200px;
+    background: rgba(99,102,241,0.3);
+    border-radius: 50%;
+    top: -60px; right: -40px;
+    filter: blur(60px);
+  }
+  .glass-card {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 20px;
+    padding: 28px;
+    position: relative;
+    z-index: 1;
+  }
+  .glass-badge {
+    display: inline-block;
+    background: rgba(99,102,241,0.25);
+    border: 1px solid rgba(99,102,241,0.4);
+    color: #a5b4fc;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 100px;
+    margin-bottom: 16px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .glass-card h3 { color: #fff; font-weight: 300; font-size: 22px; margin-bottom: 10px; }
+  .glass-card p { color: rgba(255,255,255,0.5); font-size: 13px; line-height: 1.7; }
+  .glass-btn {
+    margin-top: 20px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #fff;
+    padding: 10px 22px;
+    border-radius: 50px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .glass-btn:hover { background: rgba(255,255,255,0.2); transform: translateY(-1px); }
+
+  /* ══════════════════════════════════════════
+     2. BRUTALISM
+  ══════════════════════════════════════════ */
+  .brutal-wrap {
+    background: #FFE600;
+    padding: 32px;
+    min-height: 280px;
+    position: relative;
+  }
+  .brutal-card {
+    background: #fff;
+    border: 3px solid #000;
+    box-shadow: 8px 8px 0 #000;
+    padding: 28px;
+  }
+  .brutal-tag {
+    background: #000;
+    color: #FFE600;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 12px;
+    letter-spacing: 3px;
+    padding: 3px 10px;
+    display: inline-block;
+    margin-bottom: 14px;
+  }
+  .brutal-card h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    letter-spacing: 2px;
+    color: #000;
+    line-height: 1;
+  }
+  .brutal-card p { color: #333; font-size: 13px; line-height: 1.5; margin-top: 10px; }
+  .brutal-btn {
+    margin-top: 20px;
+    background: #000;
+    color: #FFE600;
+    border: 3px solid #000;
+    padding: 10px 22px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.1s;
+    box-shadow: 4px 4px 0 #333;
+  }
+  .brutal-btn:hover { box-shadow: none; transform: translate(4px, 4px); }
+
+  /* ══════════════════════════════════════════
+     3. NEUMORPHISM
+  ══════════════════════════════════════════ */
+  .neumorphism-wrap {
+    background: #e0e5ec;
+    padding: 40px;
+    min-height: 280px;
+  }
+  .neumorphism-card {
+    background: #e0e5ec;
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: 10px 10px 30px #b8bec7, -10px -10px 30px #ffffff;
+  }
+  .neumorphism-card h3 { color: #4a5568; font-weight: 500; font-size: 20px; margin-bottom: 10px; }
+  .neumorphism-card p { color: #718096; font-size: 13px; line-height: 1.7; }
+  .neumorphism-btn {
+    margin-top: 22px;
+    background: #e0e5ec;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 24px;
+    color: #4a5568;
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 5px 5px 12px #b8bec7, -5px -5px 12px #ffffff;
+    transition: all 0.2s;
+  }
+  .neumorphism-btn:hover { box-shadow: 3px 3px 8px #b8bec7, -3px -3px 8px #ffffff; }
+  .neumorphism-btn:active { box-shadow: inset 5px 5px 10px #b8bec7, inset -5px -5px 10px #ffffff; }
+  .neu-icon {
+    width: 50px; height: 50px;
+    background: #e0e5ec;
+    border-radius: 14px;
+    box-shadow: 5px 5px 12px #b8bec7, -5px -5px 12px #ffffff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    margin-bottom: 18px;
+  }
+
+  /* ══════════════════════════════════════════
+     4. RETRO / 80s SYNTHWAVE
+  ══════════════════════════════════════════ */
+  .retro-wrap {
+    background: #0d0221;
+    padding: 40px;
+    min-height: 280px;
+    position: relative;
+    overflow: hidden;
+  }
+  .retro-grid {
     position: absolute;
     inset: 0;
-    background: var(--rose);
-    transform: translateX(-101%);
-    transition: transform 0.4s ease;
-    z-index: -1;
-  }
-  .open-btn:hover::before { transform: translateX(0); }
-  .open-btn:hover { color: white; box-shadow: 0 0 30px rgba(232,67,107,0.5); }
-
-  /* ======= MAIN CONTENT ======= */
-  #main {
-    opacity: 0;
-    transition: opacity 1.5s ease 0.5s;
-  }
-  #main.show { opacity: 1; }
-
-  /* ======= HERO ======= */
-  #hero {
-    min-height: 100vh;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    position: relative;
-    overflow: hidden;
-    background: radial-gradient(ellipse 80% 60% at 50% 50%, #2d0a1a 0%, var(--deep) 100%);
-    padding: 4rem 2rem;
-  }
-
-  .stars-bg {
-    position: absolute; inset: 0;
     background-image:
-      radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.4) 0%, transparent 100%),
-      radial-gradient(1px 1px at 80% 10%, rgba(255,255,255,0.3) 0%, transparent 100%),
-      radial-gradient(1px 1px at 60% 70%, rgba(255,255,255,0.25) 0%, transparent 100%),
-      radial-gradient(1px 1px at 10% 80%, rgba(255,255,255,0.2) 0%, transparent 100%),
-      radial-gradient(1px 1px at 90% 60%, rgba(255,255,255,0.3) 0%, transparent 100%),
-      radial-gradient(2px 2px at 45% 20%, rgba(201,151,58,0.4) 0%, transparent 100%),
-      radial-gradient(1px 1px at 70% 85%, rgba(255,255,255,0.2) 0%, transparent 100%);
+      linear-gradient(rgba(255,0,255,0.15) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,0,255,0.15) 1px, transparent 1px);
+    background-size: 30px 30px;
+    perspective: 300px;
+    transform: rotateX(40deg) scaleX(1.4) translateY(30%);
+    transform-origin: bottom center;
   }
-
-  .hero-label {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    color: rgba(201,151,58,0.8);
-    font-size: 0.85rem;
-    letter-spacing: 0.5em;
-    text-transform: uppercase;
-    margin-bottom: 1.5rem;
-    animation: heroIn 1.2s ease both 0.2s;
-  }
-
-  .hero-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(3rem, 10vw, 7rem);
-    font-weight: 400;
-    color: var(--cream);
-    text-align: center;
-    line-height: 1.05;
-    animation: heroIn 1.2s ease both 0.5s;
-    position: relative;
-  }
-  .hero-title em {
-    font-style: italic;
-    color: var(--rose);
-    display: block;
-    text-shadow: 0 0 60px rgba(232,67,107,0.4);
-  }
-  .hero-title .name-highlight {
-    font-family: 'Dancing Script', cursive;
-    font-size: clamp(4rem, 13vw, 9rem);
-    color: var(--blush);
-    display: block;
-    text-shadow: 0 0 80px rgba(247,184,196,0.4);
-    line-height: 1;
-    margin: 0.1em 0;
-  }
-
-  @keyframes heroIn {
-    from { opacity: 0; transform: translateY(30px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .hero-divider {
-    display: flex; align-items: center; gap: 1rem;
-    margin: 2rem 0;
-    animation: heroIn 1.2s ease both 0.9s;
-  }
-  .hero-divider::before, .hero-divider::after {
-    content: '';
-    width: 80px; height: 1px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  }
-  .hero-divider span { color: var(--rose); font-size: 1.4rem; }
-
-  .hero-sub {
-    font-family: 'Cormorant Garamond', serif;
-    color: rgba(247,184,196,0.7);
-    font-size: clamp(1rem, 2.5vw, 1.3rem);
-    font-style: italic;
-    text-align: center;
-    max-width: 480px;
-    line-height: 1.8;
-    animation: heroIn 1.2s ease both 1.2s;
-  }
-
-  .scroll-hint {
-    position: absolute;
-    bottom: 2.5rem;
-    display: flex; flex-direction: column;
-    align-items: center; gap: 0.5rem;
-    color: rgba(247,184,196,0.4);
-    font-size: 0.7rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    animation: heroIn 1.2s ease both 1.8s;
-  }
-  .scroll-arrow {
-    width: 1px; height: 40px;
-    background: linear-gradient(to bottom, transparent, var(--rose));
-    animation: scrollBounce 1.5s ease-in-out infinite;
-  }
-  @keyframes scrollBounce {
-    0%, 100% { transform: scaleY(1); opacity: 0.4; }
-    50%       { transform: scaleY(0.6); opacity: 1; }
-  }
-
-  /* ======= REASONS SECTION ======= */
-  #reasons {
-    background: var(--cream);
-    padding: 7rem 2rem;
-    position: relative;
-    overflow: hidden;
-  }
-  #reasons::before {
-    content: '&#x2764;';
-    position: absolute;
-    font-size: 40rem;
-    opacity: 0.03;
-    top: -5rem; left: -8rem;
-    color: var(--rose);
-    pointer-events: none;
+  .retro-content { position: relative; z-index: 1; }
+  .retro-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    letter-spacing: 4px;
+    background: linear-gradient(180deg, #ff00ff, #00ffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
     line-height: 1;
   }
-
-  .section-label {
-    text-align: center;
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    color: var(--rose);
-    font-size: 0.85rem;
-    letter-spacing: 0.5em;
-    text-transform: uppercase;
-    margin-bottom: 0.8rem;
+  .retro-sub {
+    font-family: 'IBM Plex Mono', monospace;
+    color: #00ffff;
+    font-size: 11px;
+    letter-spacing: 3px;
+    margin-top: 6px;
+    text-shadow: 0 0 10px #00ffff;
   }
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 400;
-    color: var(--deep);
-    text-align: center;
-    margin-bottom: 4rem;
-  }
-  .section-title em { font-style: italic; color: var(--rose); }
-
-  .reasons-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 2rem;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  .reason-card {
-    background: white;
-    padding: 2.5rem 2rem;
-    position: relative;
-    border-bottom: 3px solid transparent;
-    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-    overflow: hidden;
-  }
-  .reason-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--rose), var(--blush), var(--gold));
-    transform: scaleX(0);
-    transition: transform 0.4s ease;
-    transform-origin: left;
-  }
-  .reason-card:hover::before { transform: scaleX(1); }
-  .reason-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 50px rgba(232,67,107,0.12);
-    border-bottom-color: var(--rose);
-  }
-
-  .reason-number {
-    font-family: 'Playfair Display', serif;
-    font-size: 4rem;
-    font-style: italic;
-    color: rgba(232,67,107,0.1);
-    line-height: 1;
-    margin-bottom: 0.5rem;
-  }
-  .reason-icon { font-size: 1.8rem; margin-bottom: 0.8rem; display: block; }
-  .reason-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.2rem;
-    color: var(--deep);
-    margin-bottom: 0.6rem;
-    font-weight: 700;
-  }
-  .reason-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.05rem;
-    color: #666;
-    line-height: 1.7;
-  }
-
-  /* ======= LETTER SECTION ======= */
-  #letter {
-    background: linear-gradient(135deg, #1a0a10 0%, #2d1020 50%, #1a0a10 100%);
-    padding: 8rem 2rem;
-    position: relative;
-    overflow: hidden;
-  }
-  #letter::before {
-    content: '"';
-    font-family: 'Playfair Display', serif;
-    font-size: 30rem;
-    color: rgba(232,67,107,0.05);
-    position: absolute;
-    top: -5rem; left: -2rem;
-    line-height: 1;
-    pointer-events: none;
-  }
-
-  .letter-container {
-    max-width: 680px;
-    margin: 0 auto;
-    position: relative;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(247,184,196,0.15);
-    padding: 4rem 3.5rem;
-    backdrop-filter: blur(10px);
-  }
-  .letter-container::before {
-    content: '';
-    position: absolute;
-    inset: -1px;
-    background: linear-gradient(135deg, rgba(232,67,107,0.3), transparent, rgba(201,151,58,0.2));
-    z-index: -1;
-    border-radius: 1px;
-  }
-
-  .letter-date {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    color: var(--gold);
-    font-size: 0.9rem;
-    letter-spacing: 0.2em;
-    margin-bottom: 2rem;
-    opacity: 0.8;
-  }
-  .letter-greeting {
-    font-family: 'Dancing Script', cursive;
-    font-size: 2.2rem;
-    color: var(--blush);
-    margin-bottom: 1.5rem;
-  }
-  .letter-body {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.15rem;
-    color: rgba(253,246,240,0.85);
-    line-height: 2;
-    font-style: italic;
-  }
-  .letter-body p { margin-bottom: 1.2rem; }
-  .letter-body strong {
-    color: var(--blush);
-    font-style: normal;
-    font-weight: 400;
-  }
-  .letter-signature {
-    margin-top: 2.5rem;
-    font-family: 'Dancing Script', cursive;
-    font-size: 2rem;
-    color: var(--rose);
-    text-align: right;
-  }
-  .letter-signature small {
-    display: block;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 0.8rem;
-    color: rgba(247,184,196,0.5);
-    letter-spacing: 0.2em;
-    font-style: normal;
-    margin-top: 0.3rem;
-  }
-
-  /* ======= THE QUESTION ======= */
-  #question {
-    background: var(--cream);
-    padding: 8rem 2rem;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .question-bg-text {
-    position: absolute;
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(5rem, 20vw, 15rem);
-    font-style: italic;
-    color: rgba(232,67,107,0.04);
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    white-space: nowrap;
-    pointer-events: none;
-    font-weight: 700;
-  }
-
-  .question-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.5rem, 7vw, 5.5rem);
-    font-weight: 400;
-    color: var(--deep);
-    line-height: 1.15;
-    margin-bottom: 1.5rem;
-  }
-  .question-title em { font-style: italic; color: var(--rose); }
-  .question-title .q-name {
-    font-family: 'Dancing Script', cursive;
-    font-size: clamp(3rem, 9vw, 7rem);
-    color: var(--rose);
-    display: block;
-    text-shadow: 0 0 40px rgba(232,67,107,0.2);
-  }
-
-  .question-sub {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    color: #888;
-    font-size: 1.2rem;
-    margin-bottom: 4rem;
-  }
-
-  .answer-buttons {
-    display: flex; gap: 1.5rem;
-    justify-content: center; flex-wrap: wrap;
-  }
-
-  .btn-yes {
-    padding: 1.2rem 3.5rem;
-    background: var(--rose);
-    color: white;
-    border: none;
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
-    font-style: italic;
-    cursor: none;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.3s, box-shadow 0.3s;
-    letter-spacing: 0.05em;
-  }
-  .btn-yes::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
-  }
-  .btn-yes:hover {
-    transform: scale(1.08);
-    box-shadow: 0 12px 40px rgba(232,67,107,0.5);
-  }
-
-  .btn-no {
-    padding: 1.2rem 3.5rem;
+  .retro-p { color: rgba(255,255,255,0.5); font-size: 13px; line-height: 1.6; margin-top: 16px; }
+  .retro-btn {
+    margin-top: 20px;
     background: transparent;
-    color: #bbb;
-    border: 1px solid #ddd;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem;
-    font-style: italic;
-    cursor: none;
+    border: 1px solid #ff00ff;
+    color: #ff00ff;
+    padding: 10px 22px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    text-transform: uppercase;
+    box-shadow: 0 0 15px rgba(255,0,255,0.4), inset 0 0 15px rgba(255,0,255,0.1);
     transition: all 0.3s;
-    letter-spacing: 0.05em;
+  }
+  .retro-btn:hover { box-shadow: 0 0 30px rgba(255,0,255,0.7), inset 0 0 30px rgba(255,0,255,0.2); }
+
+  /* ══════════════════════════════════════════
+     5. MINIMALISM
+  ══════════════════════════════════════════ */
+  .minimal-wrap {
+    background: #fafafa;
+    padding: 52px 44px;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .minimal-line {
+    width: 32px; height: 1px;
+    background: #000;
+    margin-bottom: 28px;
+  }
+  .minimal-wrap h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 32px;
+    color: #111;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+  }
+  .minimal-wrap p { color: #888; font-size: 13px; line-height: 1.8; margin-top: 14px; font-weight: 300; }
+  .minimal-link {
+    margin-top: 28px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #000;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .minimal-link::after { content: '→'; transition: transform 0.2s; }
+  .minimal-link:hover::after { transform: translateX(4px); }
+
+  /* ══════════════════════════════════════════
+     6. MATERIAL DESIGN 3
+  ══════════════════════════════════════════ */
+  .material-wrap {
+    background: #fffbfe;
+    padding: 32px;
+    min-height: 280px;
+  }
+  .material-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.08);
+  }
+  .material-icon {
+    width: 44px; height: 44px;
+    background: #eaddff;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+  .material-card h3 { font-size: 18px; font-weight: 500; color: #1c1b1f; }
+  .material-card p { color: #49454f; font-size: 13px; line-height: 1.6; margin-top: 8px; }
+  .material-actions { display: flex; gap: 8px; margin-top: 20px; }
+  .mat-btn-filled {
+    background: #6750a4; color: #fff; border: none;
+    padding: 10px 20px; border-radius: 50px;
+    font-size: 13px; font-weight: 500;
+    cursor: pointer; transition: box-shadow 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .mat-btn-filled:hover { box-shadow: 0 4px 12px rgba(103,80,164,0.4); }
+  .mat-btn-outline {
+    background: transparent; color: #6750a4;
+    border: 1px solid #79747e;
+    padding: 10px 20px; border-radius: 50px;
+    font-size: 13px; font-weight: 500;
+    cursor: pointer; transition: background 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .mat-btn-outline:hover { background: #f3ebff; }
+
+  /* ══════════════════════════════════════════
+     7. DARK LUXURY
+  ══════════════════════════════════════════ */
+  .luxury-wrap {
+    background: #0a0a0a;
+    padding: 44px;
+    min-height: 280px;
+    position: relative;
+    overflow: hidden;
+  }
+  .luxury-wrap::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(196,160,90,0.12) 0%, transparent 70%);
+  }
+  .luxury-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #c4a05a, transparent);
+    margin: 20px 0;
+  }
+  .luxury-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 4px;
+    color: #c4a05a;
+    text-transform: uppercase;
+  }
+  .luxury-wrap h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    font-weight: 400;
+    color: #f5f0e8;
+    line-height: 1.2;
+    margin-top: 12px;
+  }
+  .luxury-wrap p { color: #6b6b6b; font-size: 13px; line-height: 1.8; margin-top: 12px; font-weight: 300; }
+  .luxury-btn {
+    margin-top: 24px;
+    background: transparent;
+    border: 1px solid #c4a05a;
+    color: #c4a05a;
+    padding: 11px 28px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .luxury-btn:hover { background: #c4a05a; color: #000; }
+
+  /* ══════════════════════════════════════════
+     8. RETRO PIXEL / 8-BIT
+  ══════════════════════════════════════════ */
+  .pixel-wrap {
+    background: #1a1c2c;
+    padding: 40px;
+    min-height: 280px;
+    image-rendering: pixelated;
+  }
+  .pixel-card {
+    background: #29366f;
+    border: 4px solid #566c86;
+    padding: 24px;
     position: relative;
   }
-
-  /* ======= YES OVERLAY ======= */
-  #yes-overlay {
-    position: fixed; inset: 0;
-    background: linear-gradient(135deg, #1a0a10, #3d0f1f);
-    z-index: 200;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    text-align: center;
-    padding: 2rem;
-    opacity: 0; pointer-events: none;
-    transition: opacity 0.8s ease;
-  }
-  #yes-overlay.show { opacity: 1; pointer-events: all; }
-
-  .yes-icon {
-    font-size: 5rem;
-    animation: popIn 0.6s ease both 0.3s;
-    margin-bottom: 1rem;
-  }
-  .yes-title {
-    font-family: 'Dancing Script', cursive;
-    font-size: clamp(3rem, 10vw, 6rem);
-    color: var(--blush);
-    animation: popIn 0.6s ease both 0.6s;
-    text-shadow: 0 0 60px rgba(247,184,196,0.5);
-  }
-  .yes-sub {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    color: rgba(247,184,196,0.7);
-    font-size: 1.3rem;
-    max-width: 400px;
-    line-height: 1.8;
-    animation: popIn 0.6s ease both 0.9s;
-    margin-top: 1rem;
-  }
-  @keyframes popIn {
-    from { opacity: 0; transform: scale(0.5) translateY(20px); }
-    to   { opacity: 1; transform: scale(1) translateY(0); }
-  }
-
-  #confetti-canvas {
-    position: fixed; inset: 0;
+  .pixel-card::before {
+    content: '';
+    position: absolute;
+    top: -4px; left: -4px; right: -4px; bottom: -4px;
+    border: 4px solid #1a1c2c;
     pointer-events: none;
-    z-index: 201;
+  }
+  .pixel-card h3 {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 14px;
+    color: #f4f4f4;
+    line-height: 1.6;
+  }
+  .pixel-card p {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 8px;
+    color: #a7b5ea;
+    line-height: 2;
+    margin-top: 14px;
+  }
+  .pixel-btn {
+    margin-top: 20px;
+    background: #ef7d57;
+    border: 4px solid #b13e53;
+    color: #f4f4f4;
+    padding: 8px 16px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 9px;
+    cursor: pointer;
+    box-shadow: 4px 4px 0 #b13e53;
+    transition: all 0.1s;
+  }
+  .pixel-btn:active { box-shadow: 0 0 0 #b13e53; transform: translate(4px,4px); }
+  .pixel-hp {
+    display: flex; align-items: center; gap: 6px;
+    margin-top: 14px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 8px; color: #73eff7;
+  }
+  .pixel-bar { flex: 1; height: 8px; background: #1a1c2c; border: 2px solid #566c86; }
+  .pixel-bar-fill { height: 100%; background: #38b764; width: 70%; }
+
+  /* ══════════════════════════════════════════
+     9. EDITORIAL / MAGAZINE
+  ══════════════════════════════════════════ */
+  .editorial-wrap {
+    background: #f0ebe3;
+    padding: 0;
+    min-height: 280px;
+    overflow: hidden;
+  }
+  .editorial-top {
+    background: #1a1a1a;
+    padding: 24px 28px 20px;
+  }
+  .editorial-issue {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: #888;
+    text-transform: uppercase;
+  }
+  .editorial-top h3 {
+    font-family: 'Abril Fatface', serif;
+    font-size: 36px;
+    color: #fff;
+    line-height: 1;
+    margin-top: 8px;
+  }
+  .editorial-body { padding: 24px 28px; }
+  .editorial-body p { color: #4a4a4a; font-size: 13px; line-height: 1.7; }
+  .editorial-footer {
+    padding: 16px 28px;
+    border-top: 2px solid #1a1a1a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .editorial-author { font-size: 11px; color: #888; font-family: 'IBM Plex Mono', monospace; }
+  .editorial-num {
+    font-family: 'Abril Fatface', serif;
+    font-size: 28px;
+    color: #1a1a1a;
   }
 
-  /* ======= FOOTER ======= */
-  footer {
-    background: var(--deep);
+  /* ══════════════════════════════════════════
+     10. NEON / CYBERPUNK
+  ══════════════════════════════════════════ */
+  .neon-wrap {
+    background: #050505;
+    padding: 36px;
+    min-height: 280px;
+    position: relative;
+    overflow: hidden;
+  }
+  .neon-corner {
+    position: absolute;
+    width: 40px; height: 40px;
+    border-top: 2px solid #00ff9f;
+    border-left: 2px solid #00ff9f;
+    top: 20px; left: 20px;
+  }
+  .neon-corner2 {
+    position: absolute;
+    width: 40px; height: 40px;
+    border-bottom: 2px solid #ff006e;
+    border-right: 2px solid #ff006e;
+    bottom: 20px; right: 20px;
+  }
+  .neon-wrap h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: #fff;
+    text-shadow: 0 0 20px rgba(0,255,159,0.8), 0 0 40px rgba(0,255,159,0.4);
+  }
+  .neon-line {
+    width: 60px; height: 2px;
+    background: #00ff9f;
+    box-shadow: 0 0 10px #00ff9f;
+    margin: 14px 0;
+  }
+  .neon-wrap p { color: #666; font-size: 13px; line-height: 1.7; }
+  .neon-stats { display: flex; gap: 20px; margin-top: 20px; }
+  .neon-stat-val {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 22px;
+    color: #ff006e;
+    text-shadow: 0 0 15px rgba(255,0,110,0.8);
+  }
+  .neon-stat-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: #444;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  /* ══════════════════════════════════════════
+     11. PASTEL / CUTE / Y2K
+  ══════════════════════════════════════════ */
+  .y2k-wrap {
+    background: linear-gradient(135deg, #ffd6e7, #c1ffd7);
+    padding: 36px;
+    min-height: 280px;
+  }
+  .y2k-card {
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 24px;
+    border: 2px solid rgba(255,255,255,0.8);
+    box-shadow: 0 8px 32px rgba(255,150,200,0.2);
+  }
+  .y2k-emoji { font-size: 32px; margin-bottom: 12px; }
+  .y2k-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ff6b9d, #c77dff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .y2k-card p { color: #888; font-size: 13px; line-height: 1.6; margin-top: 8px; }
+  .y2k-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 16px; }
+  .y2k-pill {
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+  .y2k-pill:nth-child(1) { background: #ffd6e7; color: #c77dff; }
+  .y2k-pill:nth-child(2) { background: #d6f5ff; color: #0096c7; }
+  .y2k-pill:nth-child(3) { background: #e8ffd6; color: #52b788; }
+
+  /* ══════════════════════════════════════════
+     12. TERMINAL / HACKER
+  ══════════════════════════════════════════ */
+  .terminal-wrap {
+    background: #0c0c0c;
+    padding: 28px;
+    min-height: 280px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .terminal-bar {
+    background: #1e1e1e;
+    border-radius: 8px 8px 0 0;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot-r { background: #ff5f57; }
+  .dot-y { background: #febc2e; }
+  .dot-g { background: #28c840; }
+  .terminal-title { color: #555; font-size: 11px; margin: 0 auto; }
+  .terminal-body {
+    background: #141414;
+    border-radius: 0 0 8px 8px;
+    padding: 20px;
+    border: 1px solid #222;
+    border-top: none;
+  }
+  .t-line { font-size: 12px; line-height: 2; }
+  .t-prompt { color: #28c840; }
+  .t-cmd { color: #f8f8f2; }
+  .t-out { color: #666; }
+  .t-error { color: #ff5f57; }
+  .t-info { color: #8be9fd; }
+  .t-cursor { display: inline-block; width: 8px; height: 14px; background: #28c840; animation: blink 1s infinite; vertical-align: middle; margin-left: 2px; }
+  @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+
+  /* ══════════════════════════════════════════
+     13. ART DECO
+  ══════════════════════════════════════════ */
+  .deco-wrap {
+    background: #1a1200;
+    padding: 36px;
+    min-height: 280px;
+    position: relative;
+    overflow: hidden;
+  }
+  .deco-border {
+    border: 1px solid #c4a05a;
+    padding: 28px;
+    position: relative;
+  }
+  .deco-border::before, .deco-border::after {
+    content: '◆';
+    position: absolute;
+    color: #c4a05a;
+    font-size: 16px;
+  }
+  .deco-border::before { top: -10px; left: 50%; transform: translateX(-50%); }
+  .deco-border::after { bottom: -10px; left: 50%; transform: translateX(-50%); }
+  .deco-pattern {
+    position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(
+      45deg,
+      rgba(196,160,90,0.04) 0px, rgba(196,160,90,0.04) 1px,
+      transparent 1px, transparent 10px
+    );
+    pointer-events: none;
+  }
+  .deco-subtitle {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 5px;
+    color: #c4a05a;
+    text-transform: uppercase;
     text-align: center;
-    padding: 3rem 2rem;
   }
-  footer p {
-    font-family: 'Cormorant Garamond', serif;
+  .deco-line { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, #c4a05a, transparent); margin: 12px 0; }
+  .deco-wrap h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: #f5e8c8;
+    text-align: center;
     font-style: italic;
-    color: rgba(247,184,196,0.3);
-    font-size: 0.9rem;
-    letter-spacing: 0.2em;
   }
+  .deco-wrap p { color: #8a7a5a; font-size: 12px; line-height: 1.8; text-align: center; margin-top: 10px; }
 
-  /* Observe animations */
-  .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+  /* ══════════════════════════════════════════
+     14. SKEUOMORPHISM
+  ══════════════════════════════════════════ */
+  .skeu-wrap {
+    background: linear-gradient(160deg, #c8c8c8 0%, #a8a8a8 100%);
+    padding: 36px;
+    min-height: 280px;
   }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
+  .skeu-device {
+    background: linear-gradient(160deg, #f8f8f8 0%, #d8d8d8 100%);
+    border-radius: 18px;
+    padding: 28px;
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.8) inset,
+      0 -1px 0 rgba(0,0,0,0.15) inset,
+      0 8px 30px rgba(0,0,0,0.4),
+      0 2px 4px rgba(0,0,0,0.2);
+    border: 1px solid #999;
+  }
+  .skeu-screen {
+    background: #1e3a1e;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5) inset;
+    border: 2px solid #111;
+    margin-bottom: 16px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: #7fff7f;
+  }
+  .skeu-device h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+  }
+  .skeu-device p { color: #666; font-size: 12px; line-height: 1.6; }
+  .skeu-btn {
+    margin-top: 16px;
+    background: linear-gradient(180deg, #fff 0%, #ddd 100%);
+    border: 1px solid #aaa;
+    border-radius: 8px;
+    padding: 10px 22px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #333;
+    cursor: pointer;
+    box-shadow: 0 2px 0 #999, 0 3px 6px rgba(0,0,0,0.2);
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.1s;
+  }
+  .skeu-btn:active { box-shadow: 0 1px 0 #999; transform: translateY(1px); }
+
+  /* ══════════════════════════════════════════
+     15. FLAT DESIGN
+  ══════════════════════════════════════════ */
+  .flat-wrap {
+    background: #3498db;
+    padding: 36px;
+    min-height: 280px;
+  }
+  .flat-card { background: #fff; border-radius: 4px; padding: 28px; }
+  .flat-icon-row { display: flex; gap: 12px; margin-bottom: 20px; }
+  .flat-icon {
+    width: 44px; height: 44px;
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+  }
+  .flat-icon-1 { background: #e74c3c; }
+  .flat-icon-2 { background: #2ecc71; }
+  .flat-icon-3 { background: #f39c12; }
+  .flat-card h3 { font-size: 20px; font-weight: 700; color: #2c3e50; letter-spacing: -0.3px; }
+  .flat-card p { color: #7f8c8d; font-size: 13px; line-height: 1.6; margin-top: 8px; }
+  .flat-progress { margin-top: 18px; }
+  .flat-progress-label { display: flex; justify-content: space-between; font-size: 11px; color: #95a5a6; margin-bottom: 6px; }
+  .flat-bar { height: 6px; background: #ecf0f1; border-radius: 3px; }
+  .flat-fill { height: 100%; border-radius: 3px; }
+  .flat-fill-1 { width: 80%; background: #3498db; }
+  .flat-fill-2 { width: 60%; background: #2ecc71; margin-top: 10px; }
+
+  /* ══════════════════════════════════════════
+     16. ORGANIC / BLOB
+  ══════════════════════════════════════════ */
+  .blob-wrap {
+    background: #f0f7f4;
+    padding: 36px;
+    min-height: 280px;
+    position: relative;
+    overflow: hidden;
+  }
+  .blob-shape {
+    position: absolute;
+    width: 220px; height: 220px;
+    background: linear-gradient(135deg, #a8e6cf, #88d8b0);
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    top: -60px; right: -60px;
+    opacity: 0.5;
+    animation: morph 8s ease-in-out infinite;
+  }
+  @keyframes morph {
+    0%,100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+    50% { border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%; }
+  }
+  .blob-wrap h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    color: #2d6a4f;
+    position: relative;
+    z-index: 1;
+  }
+  .blob-tag {
+    display: inline-block;
+    background: #d8f3dc;
+    color: #2d6a4f;
+    font-size: 11px;
+    padding: 4px 12px;
+    border-radius: 100px;
+    margin-bottom: 14px;
+    font-weight: 500;
+    position: relative; z-index: 1;
+  }
+  .blob-wrap p { color: #74c69d; font-size: 13px; line-height: 1.7; margin-top: 10px; position: relative; z-index: 1; }
+  .blob-btn {
+    margin-top: 22px;
+    background: #2d6a4f;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 100px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative; z-index: 1;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .blob-btn:hover { background: #1b4332; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(45,106,79,0.3); }
+
+  /* ══════════════════════════════════════════
+     17. INDUSTRIAL / UTILITY
+  ══════════════════════════════════════════ */
+  .industrial-wrap {
+    background: #1c1c1c;
+    padding: 28px;
+    min-height: 280px;
+    border-top: 4px solid #ff6b00;
+  }
+  .ind-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .ind-badge {
+    background: #ff6b00;
+    color: #fff;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    padding: 4px 8px;
+    font-weight: 600;
+  }
+  .ind-id { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #444; letter-spacing: 1px; }
+  .ind-sep { flex: 1; height: 1px; background: #2a2a2a; }
+  .industrial-wrap h3 { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: #e0e0e0; letter-spacing: 2px; }
+  .industrial-wrap p { color: #555; font-size: 12px; line-height: 1.7; font-family: 'IBM Plex Mono', monospace; margin-top: 8px; }
+  .ind-specs { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: #2a2a2a; margin-top: 16px; }
+  .ind-spec { background: #1c1c1c; padding: 10px; }
+  .ind-spec-key { font-family: 'IBM Plex Mono', monospace; font-size: 9px; color: #444; letter-spacing: 2px; text-transform: uppercase; }
+  .ind-spec-val { font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #ff6b00; margin-top: 2px; }
+
+  /* ══════════════════════════════════════════
+     18. AURORA / GRADIENT MESH
+  ══════════════════════════════════════════ */
+  .aurora-wrap {
+    background: #05050f;
+    padding: 40px;
+    min-height: 280px;
+    position: relative;
+    overflow: hidden;
+  }
+  .aurora-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(120,40,200,0.3) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 20%, rgba(0,200,180,0.25) 0%, transparent 50%),
+      radial-gradient(ellipse at 60% 80%, rgba(255,80,120,0.2) 0%, transparent 50%);
+    filter: blur(20px);
+  }
+  .aurora-content { position: relative; z-index: 1; }
+  .aurora-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, #7828c8, #00c8b4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .aurora-wrap h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: #fff;
+    margin-top: 10px;
+    line-height: 1.2;
+  }
+  .aurora-wrap p { color: rgba(255,255,255,0.4); font-size: 13px; line-height: 1.7; margin-top: 12px; }
+  .aurora-glow-btn {
+    margin-top: 22px;
+    background: linear-gradient(135deg, #7828c8, #00c8b4);
+    border: none;
+    padding: 12px 26px;
+    color: #fff;
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 0 30px rgba(120,40,200,0.4);
+    transition: all 0.3s;
+  }
+  .aurora-glow-btn:hover { box-shadow: 0 0 50px rgba(120,40,200,0.6); transform: translateY(-2px); }
+
+  /* ══════════════════════════════════════════
+     19. SWISS / INTERNATIONAL
+  ══════════════════════════════════════════ */
+  .swiss-wrap {
+    background: #fff;
+    padding: 0;
+    min-height: 280px;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+  }
+  .swiss-top { background: #e63946; padding: 20px 28px; }
+  .swiss-num { font-family: 'Bebas Neue', sans-serif; font-size: 64px; color: #fff; line-height: 1; }
+  .swiss-body { padding: 20px 28px; border-left: 4px solid #000; margin: 20px; }
+  .swiss-body h3 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: #000;
+    letter-spacing: -0.5px;
+  }
+  .swiss-body p { color: #555; font-size: 12px; line-height: 1.7; margin-top: 6px; }
+  .swiss-footer { padding: 12px 28px; border-top: 2px solid #000; display: flex; justify-content: space-between; align-items: center; }
+  .swiss-footer span { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: #999; letter-spacing: 2px; }
+  .swiss-dot { width: 8px; height: 8px; border-radius: 50%; background: #e63946; }
+
+  /* ══════════════════════════════════════════
+     20. FROSTED DARK
+  ══════════════════════════════════════════ */
+  .frosted-wrap {
+    background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+    padding: 36px;
+    min-height: 280px;
+    position: relative;
+    overflow: hidden;
+  }
+  .frosted-circle1 {
+    position: absolute; width: 180px; height: 180px; border-radius: 50%;
+    background: rgba(255,255,255,0.03);
+    top: -60px; right: 20px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .frosted-circle2 {
+    position: absolute; width: 120px; height: 120px; border-radius: 50%;
+    background: rgba(255,255,255,0.02);
+    bottom: 20px; left: 30px;
+    border: 1px solid rgba(255,255,255,0.04);
+  }
+  .frosted-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 24px;
+    backdrop-filter: blur(10px);
+    position: relative; z-index: 1;
+  }
+  .frosted-card h3 { font-weight: 400; font-size: 20px; color: #f0f0f0; }
+  .frosted-card p { color: #666; font-size: 13px; line-height: 1.7; margin-top: 10px; }
+  .frosted-metric { display: flex; gap: 20px; margin-top: 18px; }
+  .frosted-val { font-family: 'IBM Plex Mono', monospace; font-size: 24px; color: #fff; }
+  .frosted-vlabel { font-size: 11px; color: #555; margin-top: 2px; }
+
+  /* ══════════════════════════════════════════
+     FOOTER
+  ══════════════════════════════════════════ */
+  footer {
+    text-align: center;
+    padding: 60px 20px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: #2a2a2a;
+    letter-spacing: 2px;
+    border-top: 1px solid #111;
+    margin-top: var(--gap);
   }
 </style>
 </head>
 <body>
 
-<!-- Custom cursors -->
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursor-ring"></div>
+<header>
+  <h1>UI STYLE SHOWCASE</h1>
+  <p>// 20 distinct design aesthetics — all in one file</p>
+</header>
 
-<!-- Petals container -->
-<div id="petals"></div>
+<nav class="nav">
+  <a href="#s1">Glassmorphism</a>
+  <a href="#s2">Brutalism</a>
+  <a href="#s3">Neumorphism</a>
+  <a href="#s4">Synthwave</a>
+  <a href="#s5">Minimalism</a>
+  <a href="#s6">Material 3</a>
+  <a href="#s7">Dark Luxury</a>
+  <a href="#s8">8-Bit Pixel</a>
+  <a href="#s9">Editorial</a>
+  <a href="#s10">Neon Cyber</a>
+  <a href="#s11">Y2K Pastel</a>
+  <a href="#s12">Terminal</a>
+  <a href="#s13">Art Deco</a>
+  <a href="#s14">Skeuomorph</a>
+  <a href="#s15">Flat Design</a>
+  <a href="#s16">Organic Blob</a>
+  <a href="#s17">Industrial</a>
+  <a href="#s18">Aurora Mesh</a>
+  <a href="#s19">Swiss Intl</a>
+  <a href="#s20">Frosted Dark</a>
+</nav>
 
-<!-- ============ INTRO SCREEN ============ -->
-<div id="intro">
-  <div class="intro-ring">
-    <div class="heart-center">&#x1F497;</div>
+<!-- ─────────────────────────────────────── -->
+
+<p class="section-label" id="s1"><span>01 /</span> GLASSMORPHISM</p>
+<div class="grid">
+  <div class="glass-wrap">
+    <div class="glass-inner">
+      <div class="glass-badge">New Release</div>
+      <h3>Frosted Glass UI</h3>
+      <p>Translucent surfaces layered over vivid gradients. Depth through blur, light through opacity.</p>
+      <button class="glass-btn">Explore →</button>
+    </div>
   </div>
-  <p class="intro-tagline">A letter from the heart</p>
-  <p class="intro-name">Shorna</p>
-  <button class="open-btn" onclick="openSite()">Open My Heart &rarr;</button>
 </div>
 
-<!-- ============ MAIN ============ -->
-<div id="main">
-
-  <!-- HERO -->
-  <section id="hero">
-    <div class="stars-bg"></div>
-    <p class="hero-label">Something I've been meaning to say</p>
-    <h1 class="hero-title">
-      <em>Will you be</em>
-      <span class="name-highlight">Mine?</span>
-    </h1>
-    <div class="hero-divider"><span>&#x2661;</span></div>
-    <p class="hero-sub">There are a thousand things I want to tell you — but these words are the ones I want you to hear first.</p>
-    <div class="scroll-hint">
-      <span>Scroll</span>
-      <div class="scroll-arrow"></div>
+<p class="section-label" id="s2"><span>02 /</span> BRUTALISM</p>
+<div class="grid">
+  <div class="brutal-wrap">
+    <div class="brutal-card">
+      <div class="brutal-tag">Raw & Loud</div>
+      <h3>THIS IS BRUTALISM</h3>
+      <p>Bold borders. Hard shadows. No subtlety. Maximum impact through rawness and contrast.</p>
+      <button class="brutal-btn">SMASH IT</button>
     </div>
-  </section>
-
-  <!-- REASONS -->
-  <section id="reasons">
-    <p class="section-label reveal">From my heart to yours</p>
-    <h2 class="section-title reveal">Why you, <em>Shorna</em></h2>
-    <div class="reasons-grid">
-      <div class="reason-card reveal">
-        <div class="reason-number">01</div>
-        <span class="reason-icon">&#x2728;</span>
-        <h3 class="reason-title">Your Light</h3>
-        <p class="reason-text">The way you walk into a room and everything feels a little warmer, a little brighter — that's a gift only you carry.</p>
-      </div>
-      <div class="reason-card reveal">
-        <div class="reason-number">02</div>
-        <span class="reason-icon">&#x1F319;</span>
-        <h3 class="reason-title">Your Soul</h3>
-        <p class="reason-text">Beneath every smile and every glance is a depth that I could spend a lifetime exploring and never reach the end of.</p>
-      </div>
-      <div class="reason-card reveal">
-        <div class="reason-number">03</div>
-        <span class="reason-icon">&#x1F91D;</span>
-        <h3 class="reason-title">Your Kindness</h3>
-        <p class="reason-text">You are gentle in a world that is rough. You make people feel seen. That is the rarest kind of beautiful.</p>
-      </div>
-      <div class="reason-card reveal">
-        <div class="reason-number">04</div>
-        <span class="reason-icon">&#x1F602;</span>
-        <h3 class="reason-title">Your Laugh</h3>
-        <p class="reason-text">If I could bottle one sound to carry with me everywhere, it would be that. Pure, unguarded, and completely you.</p>
-      </div>
-      <div class="reason-card reveal">
-        <div class="reason-number">05</div>
-        <span class="reason-icon">&#x1F4AD;</span>
-        <h3 class="reason-title">Your Mind</h3>
-        <p class="reason-text">The way you think, the way you see things differently — talking with you never gets old. It only gets better.</p>
-      </div>
-      <div class="reason-card reveal">
-        <div class="reason-number">06</div>
-        <span class="reason-icon">&#x1F339;</span>
-        <h3 class="reason-title">Simply You</h3>
-        <p class="reason-text">Not because you're perfect — but because you're real. And real is the most beautiful thing there is.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- LETTER -->
-  <section id="letter">
-    <div class="letter-container reveal">
-      <p class="letter-date">March 14, 2026 &nbsp;&middot;&nbsp; Written with love</p>
-      <p class="letter-greeting">My dearest Shorna,</p>
-      <div class="letter-body">
-        <p>There are words that float inside a person for a long time before they dare to come out. These are mine. I have kept them quietly, like a flame cupped in two hands — afraid to let them go but knowing they deserve to be free.</p>
-        <p>Being around you feels like <strong>coming home to a place I didn't know I was looking for.</strong> It feels easy and warm and right. You are the kind of person poems were invented for — and yet no poem feels quite enough.</p>
-        <p>I don't promise perfection. I promise <strong>presence</strong>. I promise to listen when you speak, to notice when you're quiet, to laugh with you on the ordinary days, and to hold your hand through the hard ones.</p>
-        <p>So I am here, with this page full of my heart, asking you the only question that matters to me right now —</p>
-        <p><strong>Will you be mine?</strong></p>
-      </div>
-      <div class="letter-signature">
-        Yours, always
-        <small>with all of my heart</small>
-      </div>
-    </div>
-  </section>
-
-  <!-- THE QUESTION -->
-  <section id="question">
-    <div class="question-bg-text">Yes?</div>
-    <div class="reveal">
-      <h2 class="question-title">
-        So,
-        <span class="q-name">Shorna</span>
-        <em>will you be mine?</em>
-      </h2>
-      <p class="question-sub">Only you can answer this &#x2661;</p>
-      <div class="answer-buttons">
-        <button class="btn-yes" onclick="sayYes()">Yes, I will &#x1F495;</button>
-        <button class="btn-no" id="btn-no" onmouseenter="runAway(this)">Maybe later...</button>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <p>made with every bit of love I have &nbsp;&#x2661;&nbsp; for Shorna</p>
-  </footer>
-
+  </div>
 </div>
 
-<!-- YES OVERLAY -->
-<div id="yes-overlay">
-  <canvas id="confetti-canvas"></canvas>
-  <div class="yes-icon">&#x1F495;</div>
-  <p class="yes-title">She said YES!</p>
-  <p class="yes-sub">This is the beginning of something truly beautiful. I promise to cherish every single moment with you, Shorna.</p>
+<p class="section-label" id="s3"><span>03 /</span> NEUMORPHISM</p>
+<div class="grid">
+  <div class="neumorphism-wrap">
+    <div class="neumorphism-card">
+      <div class="neu-icon">🎵</div>
+      <h3>Soft UI Design</h3>
+      <p>Elements appear to emerge from the background. Dual shadows create tactile illusion of depth.</p>
+      <button class="neumorphism-btn">Press Me</button>
+    </div>
+  </div>
 </div>
 
-<script>
-  // ---- Cursor ----
-  const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('cursor-ring');
-  document.addEventListener('mousemove', e => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top  = e.clientY + 'px';
-    ring.style.left   = e.clientX + 'px';
-    ring.style.top    = e.clientY + 'px';
-  });
+<p class="section-label" id="s4"><span>04 /</span> RETRO SYNTHWAVE</p>
+<div class="grid">
+  <div class="retro-wrap">
+    <div class="retro-grid"></div>
+    <div class="retro-content">
+      <div class="retro-title">OUTRUN</div>
+      <div class="retro-sub">RETROWAVE 1984</div>
+      <p class="retro-p">Neon gradients, perspective grids, and the aesthetic of 1980s sci-fi futures.</p>
+      <button class="retro-btn">Jack In</button>
+    </div>
+  </div>
+</div>
 
-  // ---- Floating petals ----
-  const petalEmojis = ['&#x1F338;','&#x1F33A;','&#x1F339;','&#x1F4AE;','&#x1F3F5;','&#x273F;','&#x2740;','&#x1F337;'];
-  function spawnPetal() {
-    const p = document.createElement('div');
-    p.className = 'petal';
-    p.textContent = petalEmojis[Math.floor(Math.random() * petalEmojis.length)];
-    p.style.left = Math.random() * 100 + 'vw';
-    p.style.top = '-60px';
-    const dur = 8 + Math.random() * 8;
-    p.style.animationDuration = dur + 's';
-    p.style.animationDelay = Math.random() * 3 + 's';
-    p.style.fontSize = (0.8 + Math.random() * 1) + 'rem';
-    document.getElementById('petals').appendChild(p);
-    setTimeout(() => p.remove(), (dur + 3) * 1000);
-  }
-  setInterval(spawnPetal, 700);
+<p class="section-label" id="s5"><span>05 /</span> MINIMALISM</p>
+<div class="grid">
+  <div class="minimal-wrap">
+    <div class="minimal-line"></div>
+    <h3>Less is<br><em>everything.</em></h3>
+    <p>Typography as the primary design element. Generous white space. Every pixel intentional.</p>
+    <button class="minimal-link">Read More</button>
+  </div>
+</div>
 
-  // ---- Intro ----
-  function openSite() {
-    document.getElementById('intro').classList.add('hide');
-    const main = document.getElementById('main');
-    main.classList.add('show');
-    setTimeout(() => {
-      document.getElementById('intro').style.display = 'none';
-    }, 1300);
-  }
+<p class="section-label" id="s6"><span>06 /</span> MATERIAL DESIGN 3</p>
+<div class="grid">
+  <div class="material-wrap">
+    <div class="material-card">
+      <div class="material-icon">📊</div>
+      <h3>Material You</h3>
+      <p>Dynamic colour, expressive shapes, and inclusive design built on Google's latest system.</p>
+      <div class="material-actions">
+        <button class="mat-btn-filled">Primary</button>
+        <button class="mat-btn-outline">Secondary</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-  // ---- Intersection Observer for reveals ----
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), i * 100);
-      }
-    });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+<p class="section-label" id="s7"><span>07 /</span> DARK LUXURY</p>
+<div class="grid">
+  <div class="luxury-wrap">
+    <div class="luxury-label">Maison Élite</div>
+    <div class="luxury-divider"></div>
+    <h3>Refined<br>Elegance</h3>
+    <p>Gold on obsidian. Serif type, restrained spacing, and a palette of precious metals.</p>
+    <button class="luxury-btn">Discover</button>
+  </div>
+</div>
 
-  // ---- No button runs away ----
-  function runAway(btn) {
-    const rect = btn.getBoundingClientRect();
-    const x = (Math.random() - 0.5) * 300;
-    const y = (Math.random() - 0.5) * 200;
-    btn.style.transition = 'transform 0.3s ease';
-    btn.style.transform = `translate(${x}px, ${y}px)`;
-  }
+<p class="section-label" id="s8"><span>08 /</span> 8-BIT PIXEL / RETRO GAME</p>
+<div class="grid">
+  <div class="pixel-wrap">
+    <div class="pixel-card">
+      <h3>HERO STATS</h3>
+      <div class="pixel-hp">HP <div class="pixel-bar"><div class="pixel-bar-fill"></div></div> 70/100</div>
+      <p>Pixel fonts, hard edges, and the nostalgic charm of classic video games circa 1985.</p>
+      <button class="pixel-btn">▶ START</button>
+    </div>
+  </div>
+</div>
 
-  // ---- Yes button ----
-  function sayYes() {
-    document.getElementById('yes-overlay').classList.add('show');
-    launchConfetti();
-  }
+<p class="section-label" id="s9"><span>09 /</span> EDITORIAL / MAGAZINE</p>
+<div class="grid">
+  <div class="editorial-wrap">
+    <div class="editorial-top">
+      <div class="editorial-issue">Issue 42 · March 2026</div>
+      <h3>The Art of<br>Type</h3>
+    </div>
+    <div class="editorial-body">
+      <p>Heavy display fonts, stark colour contrasts, and layouts borrowed straight from print publishing.</p>
+    </div>
+    <div class="editorial-footer">
+      <span class="editorial-author">by Claude Studio</span>
+      <span class="editorial-num">42</span>
+    </div>
+  </div>
+</div>
 
-  // ---- Confetti ----
-  function launchConfetti() {
-    const canvas = document.getElementById('confetti-canvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width  = window.innerWidth;
-    canvas.height = window.innerHeight;
+<p class="section-label" id="s10"><span>10 /</span> NEON CYBERPUNK</p>
+<div class="grid">
+  <div class="neon-wrap">
+    <div class="neon-corner"></div>
+    <div class="neon-corner2"></div>
+    <h3>SYSTEM ONLINE</h3>
+    <div class="neon-line"></div>
+    <p>Neon glows on dark backgrounds. High contrast. A digital underworld aesthetic.</p>
+    <div class="neon-stats">
+      <div>
+        <div class="neon-stat-val">94%</div>
+        <div class="neon-stat-label">Power</div>
+      </div>
+      <div>
+        <div class="neon-stat-val">7ms</div>
+        <div class="neon-stat-label">Latency</div>
+      </div>
+      <div>
+        <div class="neon-stat-val">∞</div>
+        <div class="neon-stat-label">Uptime</div>
+      </div>
+    </div>
+  </div>
+</div>
 
-    const colors = ['#e8436b','#f7b8c4','#fce4ec','#c9973a','#fff','#ff80ab'];
-    const pieces = Array.from({length: 180}, () => ({
-      x: Math.random() * canvas.width,
-      y: -20,
-      r: 4 + Math.random() * 6,
-      d: 2 + Math.random() * 4,
-      color: colors[Math.floor(Math.random() * colors.length)],
-      tilt: Math.random() * 10 - 5,
-      tiltAngle: 0,
-      tiltSpeed: 0.05 + Math.random() * 0.1,
-      shape: Math.random() > 0.5 ? 'circle' : 'rect'
-    }));
+<p class="section-label" id="s11"><span>11 /</span> Y2K PASTEL</p>
+<div class="grid">
+  <div class="y2k-wrap">
+    <div class="y2k-card">
+      <div class="y2k-emoji">✨</div>
+      <h3>Cute & Dreamy</h3>
+      <p>Soft gradients, bubbly shapes, and the playful energy of early 2000s internet culture.</p>
+      <div class="y2k-pills">
+        <span class="y2k-pill">✿ cute</span>
+        <span class="y2k-pill">☁ dreamy</span>
+        <span class="y2k-pill">⋆ soft</span>
+      </div>
+    </div>
+  </div>
+</div>
 
-    let frame = 0;
-    function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      pieces.forEach(p => {
-        ctx.beginPath();
-        ctx.fillStyle = p.color;
-        if (p.shape === 'circle') {
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        } else {
-          ctx.save();
-          ctx.translate(p.x, p.y);
-          ctx.rotate(p.tiltAngle);
-          ctx.fillRect(-p.r, -p.r/2, p.r*2, p.r);
-          ctx.restore();
-        }
-        ctx.fill();
+<p class="section-label" id="s12"><span>12 /</span> TERMINAL / HACKER</p>
+<div class="grid">
+  <div class="terminal-wrap">
+    <div class="terminal-bar">
+      <div class="dot dot-r"></div>
+      <div class="dot dot-y"></div>
+      <div class="dot dot-g"></div>
+      <span class="terminal-title">bash — 80×24</span>
+    </div>
+    <div class="terminal-body">
+      <div class="t-line"><span class="t-prompt">user@machine</span>:<span class="t-info">~$</span> <span class="t-cmd">npm run build</span></div>
+      <div class="t-line"><span class="t-out">▸ Compiling modules...</span></div>
+      <div class="t-line"><span class="t-out">▸ Bundling assets...</span></div>
+      <div class="t-line"><span class="t-prompt">✓ Done in 1.34s</span></div>
+      <div class="t-line"><span class="t-prompt">user@machine</span>:<span class="t-info">~$</span> <span class="t-cursor"></span></div>
+    </div>
+  </div>
+</div>
 
-        p.y += p.d;
-        p.tiltAngle += p.tiltSpeed;
-        p.x += Math.sin(frame * 0.02 + p.tiltAngle) * 1.5;
+<p class="section-label" id="s13"><span>13 /</span> ART DECO</p>
+<div class="grid">
+  <div class="deco-wrap">
+    <div class="deco-pattern"></div>
+    <div class="deco-border">
+      <div class="deco-subtitle">Atelier · MCMXXVI</div>
+      <div class="deco-line"></div>
+      <h3>L'Art Nouveau<br>de l'Écran</h3>
+      <p>Geometric opulence. Gold filigree, symmetry, and the grandeur of the 1920s in pixels.</p>
+      <div class="deco-line"></div>
+    </div>
+  </div>
+</div>
 
-        if (p.y > canvas.height) {
-          p.y = -20;
-          p.x = Math.random() * canvas.width;
-        }
-      });
-      frame++;
-      if (frame < 400) requestAnimationFrame(draw);
-      else ctx.clearRect(0, 0, canvas.width, canvas.height);
-    }
-    draw();
-  }
+<p class="section-label" id="s14"><span>14 /</span> SKEUOMORPHISM</p>
+<div class="grid">
+  <div class="skeu-wrap">
+    <div class="skeu-device">
+      <div class="skeu-screen">READY<br>LOAD"*",8,1<br>SEARCHING...<br>FOUND PROG</div>
+      <h3>Real-World Texture</h3>
+      <p>UI elements mimic physical objects — leather, metal, glass. Design from the pre-flat era.</p>
+      <button class="skeu-btn">Press Here</button>
+    </div>
+  </div>
+</div>
 
-  window.addEventListener('resize', () => {
-    const c = document.getElementById('confetti-canvas');
-    c.width  = window.innerWidth;
-    c.height = window.innerHeight;
-  });
-</script>
+<p class="section-label" id="s15"><span>15 /</span> FLAT DESIGN</p>
+<div class="grid">
+  <div class="flat-wrap">
+    <div class="flat-card">
+      <div class="flat-icon-row">
+        <div class="flat-icon flat-icon-1">📌</div>
+        <div class="flat-icon flat-icon-2">✅</div>
+        <div class="flat-icon flat-icon-3">⚡</div>
+      </div>
+      <h3>Flat &amp; Clean</h3>
+      <p>No shadows. No gradients. Pure colour blocks and crisp geometry. Microsoft Metro-era design.</p>
+      <div class="flat-progress">
+        <div class="flat-progress-label"><span>Design</span><span>80%</span></div>
+        <div class="flat-bar"><div class="flat-fill flat-fill-1"></div></div>
+        <div class="flat-progress-label" style="margin-top:8px"><span>Dev</span><span>60%</span></div>
+        <div class="flat-bar"><div class="flat-fill flat-fill-2"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p class="section-label" id="s16"><span>16 /</span> ORGANIC / BLOB</p>
+<div class="grid">
+  <div class="blob-wrap">
+    <div class="blob-shape"></div>
+    <div class="blob-tag">🌿 Natural</div>
+    <h3>Flowing Forms</h3>
+    <p>Amorphous blobs, biomorphic shapes, and a soft natural palette. Anti-grid design.</p>
+    <button class="blob-btn">Grow →</button>
+  </div>
+</div>
+
+<p class="section-label" id="s17"><span>17 /</span> INDUSTRIAL / UTILITY</p>
+<div class="grid">
+  <div class="industrial-wrap">
+    <div class="ind-header">
+      <div class="ind-badge">ACTIVE</div>
+      <div class="ind-sep"></div>
+      <div class="ind-id">ID: SYS-4492</div>
+    </div>
+    <h3>UNIT STATUS</h3>
+    <p>// Raw utility. No ornamentation. Function over form. Built for operators, not consumers.</p>
+    <div class="ind-specs">
+      <div class="ind-spec">
+        <div class="ind-spec-key">Voltage</div>
+        <div class="ind-spec-val">480V</div>
+      </div>
+      <div class="ind-spec">
+        <div class="ind-spec-key">Load</div>
+        <div class="ind-spec-val">87%</div>
+      </div>
+      <div class="ind-spec">
+        <div class="ind-spec-key">Temp</div>
+        <div class="ind-spec-val">62°C</div>
+      </div>
+      <div class="ind-spec">
+        <div class="ind-spec-key">Runtime</div>
+        <div class="ind-spec-val">1,492h</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p class="section-label" id="s18"><span>18 /</span> AURORA GRADIENT MESH</p>
+<div class="grid">
+  <div class="aurora-wrap">
+    <div class="aurora-bg"></div>
+    <div class="aurora-content">
+      <div class="aurora-tag">Northern Lights</div>
+      <h3>Radiant<br>Atmosphere</h3>
+      <p>Blended radial gradients simulate iridescent light. Depth through layered colour fog.</p>
+      <button class="aurora-glow-btn">Enter the Aurora</button>
+    </div>
+  </div>
+</div>
+
+<p class="section-label" id="s19"><span>19 /</span> SWISS INTERNATIONAL</p>
+<div class="grid">
+  <div class="swiss-wrap">
+    <div class="swiss-top">
+      <div class="swiss-num">01</div>
+    </div>
+    <div class="swiss-body">
+      <h3>Grid. Type. Purpose.</h3>
+      <p>The International Typographic Style. Helvetica-era rationalism. Logic made visible through mathematical grids and clean sans-serif type.</p>
+    </div>
+    <div class="swiss-footer">
+      <span>HELVETICA · 1957</span>
+      <div class="swiss-dot"></div>
+    </div>
+  </div>
+</div>
+
+<p class="section-label" id="s20"><span>20 /</span> FROSTED DARK</p>
+<div class="grid">
+  <div class="frosted-wrap">
+    <div class="frosted-circle1"></div>
+    <div class="frosted-circle2"></div>
+    <div class="frosted-card">
+      <h3>Dark Frosted Glass</h3>
+      <p>A darker take on glassmorphism — translucent panels over textured dark surfaces. Refined and moody.</p>
+      <div class="frosted-metric">
+        <div>
+          <div class="frosted-val">2.4k</div>
+          <div class="frosted-vlabel">Users Online</div>
+        </div>
+        <div>
+          <div class="frosted-val">99.9%</div>
+          <div class="frosted-vlabel">Uptime</div>
+        </div>
+        <div>
+          <div class="frosted-val">14ms</div>
+          <div class="frosted-vlabel">Response</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  UI STYLE SHOWCASE &nbsp;·&nbsp; 20 AESTHETICS &nbsp;·&nbsp; 2026
+</footer>
+
 </body>
 </html>
